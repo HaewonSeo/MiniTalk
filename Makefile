@@ -6,7 +6,7 @@
 #    By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/12 01:37:10 by haseo             #+#    #+#              #
-#    Updated: 2021/10/14 01:26:01 by haseo            ###   ########.fr        #
+#    Updated: 2021/10/14 23:02:04 by haseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ vpath %.c $(VPATH_DIR)
 # Library
 # ----------------------------------
 
-LIBFT			= libft.a
+LIBFT			= $(LIBFT_DIR)/libft.a
 LIB				= -lft
 
 # ----------------------------------
@@ -102,7 +102,7 @@ LIB				= -lft
 
 all:			$(OBJ_DIR) $(LIBFT) $(NAME)
 
-bonus:			$(OBJ_DIR) $(LIBFT) $(B_SERVER) $(B_CLIENT)
+bonus:			all $(B_SERVER) $(B_CLIENT)
 
 $(OBJ_DIR):
 					@$(MKDIR) $@
@@ -148,4 +148,4 @@ fclean:			clean
 
 re:				fclean all
 
-.PHONY: 		all bonus clean fclean re  $(NAME) $(SERVER) $(CLIENT)
+#.PHONY: 		all bonus clean fclean re  $(NAME) $(SERVER) $(CLIENT)
