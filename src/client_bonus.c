@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 20:20:17 by haseo             #+#    #+#             */
-/*   Updated: 2021/10/14 17:38:02 by haseo            ###   ########.fr       */
+/*   Updated: 2021/10/14 18:31:53 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	send_msg(int server_pid, char *msg)
 				kill(server_pid, SIGUSR2);
 			else
 				kill(server_pid, SIGUSR1);
-			usleep(200);
+			usleep(100);
 		}
 		if (!msg[i])
 			break ;
