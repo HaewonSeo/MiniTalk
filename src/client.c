@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 20:20:17 by haseo             #+#    #+#             */
-/*   Updated: 2021/10/14 18:32:08 by haseo            ###   ########.fr       */
+/*   Updated: 2021/10/15 02:24:07 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,8 @@ static void	send_msg(int server_pid, char *msg)
 	}
 }
 
-static void	ft_sigaction(int sig, siginfo_t *info, void *ucontext)
-{
-	static int	cnt;
-
-	(void)ucontext;
-	if (sig == SIGUSR1)
-	{
-		ft_printf("[Server %d] Received %d Characters\n", info->si_pid, ++cnt);
-		ft_exit(NULL);
-	}
-	else if (sig == SIGUSR2)
-		++cnt;
-}
-
 int	main(int argc, char *argv[])
 {
-	struct sigaction	sa;
 	pid_t				server_pid;
 
 	if (argc != 3 || !argv[2])
@@ -60,10 +45,6 @@ int	main(int argc, char *argv[])
 	if (server_pid <= 0)
 		ft_exit("[Error] Invalid Server PID\n");
 	ft_printf("[Client %d]>%s\n", getpid(), argv[2]);
-	sa.sa_sigaction = ft_sigaction;
-	sa.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
 	send_msg(server_pid, argv[2]);
 	return (0);
 }
