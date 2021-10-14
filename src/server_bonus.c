@@ -6,21 +6,19 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 20:20:14 by haseo             #+#    #+#             */
-/*   Updated: 2021/10/14 01:59:36 by haseo            ###   ########.fr       */
+/*   Updated: 2021/10/14 17:37:06 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static void ft_sigaction(int sig, siginfo_t *info, void *ucontext)
+static void	ft_sigaction(int sig, siginfo_t *info, void *ucontext)
 {
 	static int				client_pid;
 	static int				i;
 	static unsigned char	ch;
 
 	(void)ucontext;
-	if (sig != SIGUSR1 && sig != SIGUSR2)
-	 	return ;
 	if (!client_pid)
 	{
 		client_pid = info->si_pid;
@@ -40,8 +38,7 @@ static void ft_sigaction(int sig, siginfo_t *info, void *ucontext)
 		ft_putchar_fd(ch, STDOUT_FILENO);
 		ch = 0;
 	}
-	if (kill(client_pid, SIGUSR2) == -1)
-		ft_exit("error\n");
+	kill(client_pid, SIGUSR2);
 }
 
 int	main(void)

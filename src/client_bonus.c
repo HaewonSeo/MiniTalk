@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 20:20:17 by haseo             #+#    #+#             */
-/*   Updated: 2021/10/14 01:57:50 by haseo            ###   ########.fr       */
+/*   Updated: 2021/10/14 17:38:02 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	send_msg(int server_pid, char *msg)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (1)
@@ -29,14 +29,15 @@ static void	send_msg(int server_pid, char *msg)
 			else
 				kill(server_pid, SIGUSR1);
 			usleep(200);
-		};
+		}
 		if (!msg[i])
-			break;
+			break ;
 	}
 }
 
-static void ft_sigaction(int sig, siginfo_t *info, void *ucontext) {
-	static int cnt;
+static void	ft_sigaction(int sig, siginfo_t *info, void *ucontext)
+{
+	static int	cnt;
 
 	(void)ucontext;
 	if (sig == SIGUSR2)
@@ -48,10 +49,11 @@ static void ft_sigaction(int sig, siginfo_t *info, void *ucontext) {
 	}
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	struct sigaction	sa;
 	pid_t				server_pid;
+
 	if (argc != 3 || !argv[2])
 		ft_exit("[Usage] ./client [Server PID] [Message]\n");
 	server_pid = ft_atoi(argv[1]);
@@ -67,4 +69,3 @@ int main(int argc, char *argv[])
 		pause();
 	return (0);
 }
-
